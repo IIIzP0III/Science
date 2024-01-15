@@ -11,6 +11,6 @@ document.querySelector("h1").onmouseover = event => {
   })
     .join("");
     if(iteration >= event.target.dataset.value.length) clearInterval(interval);
-    iteration += 1/4;
+    iteration += 1/30;
   }, 30);
 }

@@ -1,0 +1,8 @@
+body {
+  background-color: black;
+}
+h1 {
+  color: orange;
+  font-size: 9em;
+  font-family: "Mono Space", monospace;
+}

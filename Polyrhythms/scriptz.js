@@ -21,12 +21,14 @@ const draw = () => {
 
   const radius = Math.min(space.width, space.height) * 0.5;
   const length = (end.x - start.x) * 5;
-  const velocity = 0.05;
   const arcRadius = length * 0.05,
+        velocity = 0.3,
         angle = Math.PI + (elapsedTime * velocity);
-  
-  const x = center.x + arcRadius * Math.cos(angle),
-        y = center.y + arcRadius * Math.sin(angle);
+        maxAngle = 2*Math.PI,
+        modDistance = angle % maxAngle;
+        adjustedAngle = modDistance >= Math.PI ? modDistance : maxAngle - modDistance;
+  const x = center.x + arcRadius * Math.cos(adjustedAngle),
+        y = center.y + arcRadius * Math.sin(adjustedAngle);
   
   drawer.strokeStyle = "orange";
   drawer.lineWidth = 5;

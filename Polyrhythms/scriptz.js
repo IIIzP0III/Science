@@ -14,40 +14,41 @@ const draw = () => {
   };
   const center = {
     x: space.width * 0.5,
-    y: space.height * 0.5
+    y: space.height * 0.9
   };
 
   const radius = Math.min(space.width, space.height) * 1.5;
   const length = (end.x - start.x) * 4;
   const initialArcRadius = length * 0.03;
   const currentTime = new Date().getTime(),
-        elapsedTime = (currentTime - startTime) / 1000;
+    elapsedTime = (currentTime - startTime) / 1000;
   const arcRadius = length * 0.05,
-        velocity = 0.3,
-        angle = Math.PI + (elapsedTime * velocity);
-        maxAngle = 2*Math.PI,
-        modDistance = angle % maxAngle;
-        adjustedAngle = modDistance >= Math.PI ? modDistance : maxAngle - modDistance;
-  
-for(i=1;i<=21;i++) {
-  const o = i/5;
-  const x = center.x + initialArcRadius * o * Math.cos(adjustedAngle),
-        y = center.y + initialArcRadius * o * Math.sin(adjustedAngle);
-  drawer.strokeStyle = "orange";
-  drawer.lineWidth = 1;
-  drawer.beginPath();
-  
-  drawer.arc(center.x, center.y, initialArcRadius * o, Math.PI, 2 * Math.PI);
-  drawer.stroke();
+    maxAngle = 2 * Math.PI;
 
-  
-  drawer.fillStyle = "orange";
-  drawer.beginPath();
+  for (i = 1; i <= 21; i++) {
+    const o = i / 25,
+      velocity = 0.3 - o,
+      angle = Math.PI + elapsedTime * velocity,
+      modDistance = angle % maxAngle;
+    adjustedAngle =
+      modDistance >= Math.PI ? modDistance : maxAngle - modDistance;
+    const x = center.x + initialArcRadius * o * Math.cos(adjustedAngle),
+      y = center.y + initialArcRadius * o * Math.sin(adjustedAngle);
+    drawer.strokeStyle = "orange";
+    drawer.lineWidth = 1;
+    drawer.beginPath();
 
-  drawer.arc(x, y, initialArcRadius * 0.05, 0, Math.PI * 2);
-  drawer.fill();
-  drawer.stroke();
-}
+    drawer.arc(center.x, center.y, initialArcRadius * o, Math.PI, 2 * Math.PI);
+    drawer.stroke();
+
+    drawer.fillStyle = "orange";
+    drawer.beginPath();
+
+    drawer.arc(x, y, initialArcRadius * 0.05, 0, Math.PI * 2);
+    drawer.fill();
+    drawer.stroke();
+  }
   requestAnimationFrame(draw);
 };
 draw();
+
